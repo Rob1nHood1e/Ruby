@@ -44,10 +44,16 @@ def min_digit(x,q=10)
   min
 end
 
+def div_not_three(x)
+  count = 0
+  (1..x).each{|i| if (x % i == 0 &&  i % 3 != 0) then count += 1 end}
+  count
+end
 
 
 num = ARGV[0].to_i
 puts digits_sum(num)
+puts digits_mult(num)
 puts max_digit(num)
 puts min_digit(num)
-puts digits_mult(num)
+puts div_not_three(num)
