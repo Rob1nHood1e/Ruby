@@ -50,6 +50,18 @@ def div_not_three(x)
   count
 end
 
+def min_odd_digit(x,q=10)
+  min = 10
+  while x > 0
+    if last_digit(x,q).odd?
+      if last_digit(x,q) < min
+        min = last_digit(x,q)
+      end
+    end
+    x /= q
+  end
+  min
+end
 
 num = ARGV[0].to_i
 puts digits_sum(num)
@@ -57,3 +69,4 @@ puts digits_mult(num)
 puts max_digit(num)
 puts min_digit(num)
 puts div_not_three(num)
+puts min_odd_digit(num)
