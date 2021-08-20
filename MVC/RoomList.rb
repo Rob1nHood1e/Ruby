@@ -45,4 +45,40 @@ class ListRoom
         add(Room.new(room[0], room[1], room[2], room[3], room[4], room[5]))
       end
     end
+
+    def write_list_YAML
+      File.open("rooms.yml", "w:utf-8") { |file| file.write(@room_list.to_yaml) }
+    end
+  
+    def read_list_YAML
+      @room_list = YAML::load(File.open('rooms.yml', 'r:UTF-8'))
+    end
+
+    def write_list_JSON
+      File.open("rooms.json","w:UTF-8") do |file|
+        tempHash = {}
+        @room_list.each do |room|
+          tempHash[id] = { 
+            "id": room.id,
+            "name": room.name,
+            "guests_num": room.guests_num,
+            "comf_lvl": room.comf_lvl,
+            "price": room.price,
+            "description": room.description,
+          }
+        end
+        file.write(JSON.pretty_generate(tempHash))
+      end
+    end
+  
+    def read_list_JSON
+      File.open("rooms.json", 'r:UTF-8') do |file|
+        data = JSON.parse(file.read)
+        data.each do |key, value|
+          room = Room.new(value["id"], value["name"], value["guests_num"], value["comf_lvl"],
+            value["price"], value["description"])
+          add(room)
+        end
+      end
+    end
 end

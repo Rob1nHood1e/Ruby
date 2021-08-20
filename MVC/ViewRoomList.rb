@@ -65,6 +65,21 @@ class ViewRoomList
       end
   end
 
+  def yaml_write
+    @room_list.write_list_YAML()
+  end
+
+  def yaml_read
+    @room_list.read_list_YAML()
+  end
+
+  def json_write
+    @room_list.write_list_JSON()
+  end
+
+  def json_read
+    @room_list.read_list_JSON()
+  end
 
 rooml = ViewRoomList.new()
 def menu room
@@ -74,7 +89,11 @@ def menu room
   puts "4. Запись в файл"
   puts "5. Чтение из файла"
   puts "6. Поиск номера"
-  puts "7. Закрыть программу."
+  puts "7. Запись в YAML"
+  puts "8. Чтение из YAML"
+  puts "9. Запись в JSON"
+  puts "10. Чтение из JSON"
+  puts "11. Закрыть программу."
   method =  STDIN.gets.chomp.force_encoding("cp866").encode("utf-8", replace: nil)
   case method
   when "1"
@@ -90,6 +109,14 @@ def menu room
   when "6"
     room.search_room()
   when "7"
+    tour.yaml_write()
+  when "8"
+    tour.yaml_read()
+  when "9"
+    tour.json_write()
+  when "10"
+    tour.json_read()
+  when "11"
     exit()
   end
   menu(room)
