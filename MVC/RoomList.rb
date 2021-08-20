@@ -81,4 +81,18 @@ class ListRoom
         end
       end
     end
+
+    def read_db
+      @room_list = DB.get_instance.read_list
+    end
+  
+    def add_to_db(id, name, guests_num, comf_lvl, price, description)
+      DB.get_instance.add_room(id, name, guests_num, comf_lvl, price, description)
+    end
+  
+    def delete_from_db(room)
+      DB.get_instance.delete_room(room)
+      @room_list = []
+      read_db
+    end
 end
